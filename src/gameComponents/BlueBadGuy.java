@@ -1,7 +1,8 @@
 package gameComponents;
 
+// @author Maggie Bickerstaffe
 import javafx.scene.image.Image;
-
+//BlueBadGuy Class, extends the breaker superclass but allows for a different point value 
 public class BlueBadGuy extends Breaker{
 
 	public int POINTVALUE;
