@@ -5,7 +5,7 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class Breaker {
+public abstract class Breaker {
 	public int BREAKERWIDTH = 50;
 	public int BREAKERHEIGHT = 20;
 	public int POINTVALUE = 0;

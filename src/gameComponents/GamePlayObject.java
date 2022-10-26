@@ -8,7 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
 
 // @author Maggie Bickerstaffe
-public class GamePlayObject{
+public abstract class GamePlayObject{
 
 	//initialize fields
 	public static final double OBJECTRADIUS = 3;
