@@ -425,4 +425,3 @@ public class BreakoutScene extends SetScene{
 		return scene1;
 	}
 }
-

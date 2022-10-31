@@ -3,7 +3,9 @@ package gameComponents;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Rectangle;
 
+//@author: Shannon Seignious
 public class Bat extends PlayerDevice {
 
 	//initialize fields
@@ -25,9 +27,10 @@ public class Bat extends PlayerDevice {
 		playerDevice = playerBat;
 
 	}
-	
+
 	@Override
 	public Node getView() {
-		return playerBat;
+		// Creates player device node
+		return playerDevice;
 	}
 }

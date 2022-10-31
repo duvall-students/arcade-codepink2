@@ -46,14 +46,7 @@ public class Breakout extends Game {
     }
     
     public void resetGame(Ball ball) {
-    	ball.setPosition(192, 250);
-    }
-    
-    public boolean lostGame(Player player) {
-    	if (player.getLives() <= 0) {
-    		return true;
-    	}
-    	return false;
+    	ball.setPosition(STARTING_X_POSITION, STARTING_Y_POSITION);
     }
 
 }
