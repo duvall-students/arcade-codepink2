@@ -7,13 +7,15 @@ public abstract class PlayerDevice {
 	
 	public int playerDeviceWidth;
 	public int playerDeviceHeight;
-	// public Paint PLAYERDEVICECOLOR = Color.web("#db027e");
 	
 	protected ImageView playerDevice;
 	
-	public void setPosition(int X, int Y) {
+	public void setXPosition(double X) {
 		playerDevice.setX(X);
-		playerDevice.setY(Y);
+	}
+	
+	public int getXPosition() {
+		return (int) playerDevice.getX();
 	}
 	
 	public abstract Node getView();
