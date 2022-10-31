@@ -1,5 +1,5 @@
 package display;
 
-public class GalagaScene {
-
+public class GalagaScene{
+	
 }
