@@ -1,5 +1,5 @@
 package gamePlay;
 
-public class Galaga {
+public class Galaga extends Game {
 
 }
