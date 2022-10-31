@@ -11,6 +11,7 @@ public class Ball extends GamePlayObject{
     private ImageView myView;
 	public int BALL_MIN_SPEED;
     public int BALL_MAX_SPEED;
+    public static final double BALLRADIUS = 25;
     
 	
 	public Ball (Image image) {
@@ -38,5 +39,11 @@ public class Ball extends GamePlayObject{
     	myVelocity = new Point2D(getRandomInRange(BALL_MIN_SPEED + 100, BALL_MIN_SPEED + 100),
                 				 getRandomInRange(BALL_MIN_SPEED + 100, BALL_MIN_SPEED + 1000));
     }
+    
+	public void changeBallColor(Image nextLevelBall) {
+		myView.setImage(nextLevelBall);
+		myView.setFitWidth(BALLRADIUS);
+		myView.setFitHeight(BALLRADIUS);
+	}
 
 }

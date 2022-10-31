@@ -45,6 +45,7 @@ public class SetScene extends Application{
 		launch(args);
     }
 	
+	//general setScene class
 	public void start (Stage stage) {
 		// attach scene to the stage and display it
 		myScene = setUp();
@@ -61,6 +62,7 @@ public class SetScene extends Application{
 		animation.getKeyFrames().add(frame);
 		animation.play();
 	}
+	
 	
 	public Scene setUp() {
 		Group gameGroup = new Group(); 
