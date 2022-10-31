@@ -5,6 +5,7 @@ import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+//@author: Shannon Seignious
 public class Shooter extends PlayerDevice {
 
 	int playerDeviceWidth = 50;
@@ -12,7 +13,6 @@ public class Shooter extends PlayerDevice {
 
 	private ImageView playerShooter;
 	
-
 	public Shooter(Image shooterImage) {
 		// Displays ImageView the image as is
 		playerShooter = new ImageView();

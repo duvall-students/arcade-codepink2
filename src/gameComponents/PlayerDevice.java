@@ -11,9 +11,12 @@ public abstract class PlayerDevice {
 	
 	protected ImageView playerDevice;
 	
-	public void setPosition(int X, int Y) {
+	public void setXPosition(double X) {
 		playerDevice.setX(X);
-		playerDevice.setY(Y);
+	}
+	
+	public int getXPosition() {
+		return (int) playerDevice.getX();
 	}
 	
 	public abstract Node getView();

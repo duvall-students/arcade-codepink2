@@ -1,29 +1,37 @@
 package gamePlay;
 
 import javafx.scene.input.KeyCode;
-import javafx.scene.shape.Rectangle;
+import gameComponents.Player;
 import gameComponents.PlayerDevice;
 
-public class Game {
+//@author: Shannon Seignious
+public abstract class Game {
 	
-	public static final int MOVER_SPEED = 15;
+	public static final int MOVER_SPEED = 20;
 	
 	 public void handleKeyInput (KeyCode code, PlayerDevice playerDevice) {
 	    	
 	        if (code == KeyCode.LEFT) {
-	        	playerDevice.setX(playerDevice.getX() - MOVER_SPEED);
-	            if (playerDevice.getX() <= 0) {
-	            	playerDevice.setX(0);
+	        	playerDevice.setXPosition(playerDevice.getXPosition() - MOVER_SPEED);
+	            if (playerDevice.getXPosition() <= 0) {
+	            	playerDevice.setXPosition(0);
 	            }
 	        }
 	        else if (code == KeyCode.RIGHT) {
-	        	playerDevice.setX(playerDevice.getX() + MOVER_SPEED);
-	            if (playerDevice.getX() >= 235) {
-	            	playerDevice.setX(235);
+	        	playerDevice.setXPosition(playerDevice.getXPosition() + MOVER_SPEED);
+	            if (playerDevice.getXPosition() >= 235) {
+	            	playerDevice.setXPosition(235);
 	            }
 	        }
 	    }
 	 
-	 public boolean hasWon(int breakerCount);
+	 public abstract boolean hasWon(int breakerCount);
+	 
+	 public boolean lostGame(Player player) {
+	    	if (player.getLives() <= 0) {
+	    		return true;
+	    	}
+	    	return false;
+	    }
 
 }
