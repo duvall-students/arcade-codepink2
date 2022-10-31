@@ -9,6 +9,7 @@ public abstract class Game {
 	
 	public static final int MOVER_SPEED = 20;
 	
+	 // Moves player device
 	 public void handleKeyInput (KeyCode code, PlayerDevice playerDevice) {
 	    	
 	        if (code == KeyCode.LEFT) {
@@ -25,6 +26,7 @@ public abstract class Game {
 	        }
 	    }
 	 
+	 // Checks if game is won
 	 public abstract boolean hasWon(int breakerCount);
 	 
 	 public boolean lostGame(Player player) {

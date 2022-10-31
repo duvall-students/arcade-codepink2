@@ -7,7 +7,7 @@ import gameComponents.Ball;
 //@author: Shannon Seignious
 public class Breakout extends Game {
 	
-	public Paint BRICKCOLOR = Color.web("#db027e");
+	// public Paint BRICKCOLOR = Color.web("#db027e");
 	public static final Paint BACKGROUND = Color.web("#feb4de");
 	
 	protected static final int BALLXDIRECTION = -2;

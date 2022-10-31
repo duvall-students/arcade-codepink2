@@ -7,7 +7,6 @@ public abstract class PlayerDevice {
 	
 	public int playerDeviceWidth;
 	public int playerDeviceHeight;
-	// public Paint PLAYERDEVICECOLOR = Color.web("#db027e");
 	
 	protected ImageView playerDevice;
 	

@@ -7,6 +7,7 @@ public class Galaga extends Game {
 	
 	@Override
 	public boolean hasWon(int badGuyCount) {
+		// Checks if all bad guys have been cleared
 		if (badGuyCount == MAX_BADGUY_COUNT) {
     		return true;
     	}

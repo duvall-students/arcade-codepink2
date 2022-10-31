@@ -30,6 +30,7 @@ public class Bat extends PlayerDevice {
 
 	@Override
 	public Node getView() {
+		// Creates player device node
 		return playerDevice;
 	}
 }
