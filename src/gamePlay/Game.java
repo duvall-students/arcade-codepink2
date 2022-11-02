@@ -29,6 +29,7 @@ public abstract class Game {
 	 // Checks if game is won
 	 public abstract boolean hasWon(int breakerCount);
 	 
+	 // Checks if game is lost
 	 public boolean lostGame(Player player) {
 	    	if (player.getLives() <= 0) {
 	    		return true;
