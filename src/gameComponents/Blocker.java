@@ -4,6 +4,7 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+// Breaker class
 public class Blocker{
 	
 	//initialize fields

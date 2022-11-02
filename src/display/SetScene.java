@@ -12,6 +12,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 //@author Maggie Bickerstaffe
+
+// Class used to start the application class and create 
+// a general text display group. Is called by BreakoutScene
+// and GalagaScene 
 public class SetScene extends Application{
 	
 	private Scene myScene;
@@ -50,7 +54,7 @@ public class SetScene extends Application{
 		return myScene;
 	}
 	
-	//group to be implemented in BreakoutScene and GalagaScene
+	//group to be implemented in BreakoutScene and GalagaScene includes Text Displays
 	public Group createGroup() {
 		Group gameGroup = new Group(); 
 		displayScore.setText("SCORE: " + player.getScore());

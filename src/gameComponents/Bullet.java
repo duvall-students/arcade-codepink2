@@ -3,6 +3,8 @@ package gameComponents;
 import javafx.scene.image.Image;
 
 // @author Maggie Bickerstaffe
+
+// bullet Object class for Galaga 
 public class Bullet extends GamePlayObject{
 	
 	public double OBJECTRADIUS;
