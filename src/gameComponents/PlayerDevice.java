@@ -8,8 +8,8 @@ import javafx.scene.image.ImageView;
 public abstract class PlayerDevice {
 	
 	//initialize fields
-	public int playerDeviceWidth;
-	public int playerDeviceHeight;
+	protected int playerDeviceWidth;
+	protected int playerDeviceHeight;
 	
 	protected ImageView playerDevice;
 	

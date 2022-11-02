@@ -24,5 +24,5 @@ public class Bat extends PlayerDevice {
 	public Node getView() {
 		// Creates player device node
 		return playerDevice;
-	}
+	} 
 }
