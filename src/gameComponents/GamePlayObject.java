@@ -5,12 +5,11 @@ import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.shape.Circle;
 
 // @author Maggie Bickerstaffe
 
 //GamePlay Object Class, superclass of ball and bullet 
-public abstract class GamePlayObject{
+public class GamePlayObject{
 
 	//initialize fields
 	private static final double OBJECTRADIUS = 50;
@@ -19,7 +18,6 @@ public abstract class GamePlayObject{
 	private static final int OBJECT_MIN_SPEED = 100;
 	private static final int OBJECT_MAX_SPEED = 150;
     private Point2D myVelocity;
-    public Circle ball;
     private ImageView myView;
     private Random dice = new Random();
     
@@ -50,12 +48,6 @@ public abstract class GamePlayObject{
         myView.setY(Y);
     }
     
-    // move the ball by setting x and y over a velocity 
-    public void moveBall(double elapsedTime) {
-    	 myView.setX(myView.getX() + myVelocity.getX() * elapsedTime);
-         myView.setY(myView.getY() + myVelocity.getY() * elapsedTime);
-    }
-    
     // is the GamePlayObject off the scene?
     public boolean dropsOff (double screenWidth, double screenHeight) {
     	if (myView.getY() > screenHeight - myView.getBoundsInLocal().getHeight()) {
@@ -63,7 +55,28 @@ public abstract class GamePlayObject{
     	}
     	return false;
     }
+   
+   // moves ball downwards at angles 
+   public void moveBall(double elapsedTime) {
+   	 myView.setX(myView.getX() + myVelocity.getX() * elapsedTime);
+     myView.setY(myView.getY() + myVelocity.getY() * elapsedTime);
+   } 
+   
+   // moves bullet straight upwards 
+   public void moveBullet(double elapsedTime) {
+	 myView.setY(myView.getY() - myVelocity.getY() * elapsedTime);
+   } 
        
+    public double getX() {
+    	double x = myView.getX();
+    	return x;
+    }
+    
+    public double getY() {
+    	double y = myView.getY();
+    	return y;
+    }
+    
     public Node getView () {
         return myView;
     }
