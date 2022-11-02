@@ -3,7 +3,6 @@ package gameComponents;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.shape.Rectangle;
 
 //@author: Shannon Seignious
 public class Bat extends PlayerDevice {
@@ -14,16 +13,9 @@ public class Bat extends PlayerDevice {
 
 	private ImageView playerBat;
 
+	// Bat Constructor
 	public Bat(Image batImage) {
-		// Displays ImageView the image as is
-		playerBat = new ImageView();
-		playerBat.setImage(batImage);
-		// Scales image so that it's smaller
-		playerBat.setFitWidth(playerDeviceWidth);
-		playerBat.setFitHeight(playerDeviceHeight);
-		playerBat.setPreserveRatio(true);
-		playerBat.setSmooth(true);
-		playerBat.setCache(true);
+		super(batImage);
 		playerDevice = playerBat;
 
 	}
