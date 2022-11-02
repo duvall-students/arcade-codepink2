@@ -13,11 +13,11 @@ import javafx.scene.shape.Circle;
 public abstract class GamePlayObject{
 
 	//initialize fields
-	public static final double OBJECTRADIUS = 50;
-	public int OBJECTXPOSITION = 192;
-	public int OBJECTYPOSITION = 250;
-	public static final int OBJECT_MIN_SPEED = 100;
-    public static final int OBJECT_MAX_SPEED = 150;
+	private static final double OBJECTRADIUS = 50;
+	private int OBJECTXPOSITION = 192;
+	private int OBJECTYPOSITION = 250;
+	private static final int OBJECT_MIN_SPEED = 100;
+	private static final int OBJECT_MAX_SPEED = 150;
     private Point2D myVelocity;
     public Circle ball;
     private ImageView myView;

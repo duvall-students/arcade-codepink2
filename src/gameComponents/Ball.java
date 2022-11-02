@@ -11,9 +11,9 @@ public class Ball extends GamePlayObject{
 	
 	private Point2D myVelocity;
     private ImageView myView;
-	public int BALL_MIN_SPEED;
-    public int BALL_MAX_SPEED;
-    public static final double BALLRADIUS = 25;
+	private int BALL_MIN_SPEED;
+    private int BALL_MAX_SPEED;
+    private static final double BALLRADIUS = 25;
     
 	// ball constructor 
 	public Ball (Image image) {
