@@ -55,7 +55,7 @@ public class BreakoutScene extends SetScene{
 	public static final String BOUNCER_IMAGE = "resources/ball.gif";
 	public static final String BRICK_IMAGE = "resources/brick.gif";
 	public static final String CHANGED_BALL_COLOR_IMAGE = "resources/blueBall.gif";
-	public static final String BAT_IMAGE = "resources/breakout_bat.png";
+	public static final String BAT_IMAGE = "resources/breakout_bat.gif";
 	
 	File file = new File("TOPSCORE");
 	private List<Bricks> myBricks;
