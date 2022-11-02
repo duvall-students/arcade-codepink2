@@ -6,20 +6,17 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 //@author Maggie Bickerstaffe
+
+// Class used to start the application class and create 
+// a general text display group. Is called by BreakoutScene
+// and GalagaScene 
 public class SetScene extends Application{
 	
 	private Scene myScene;
-	
-	public static final int FRAMES_PER_SECOND = 60;
-	public static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
-	public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
-	public static final Paint BACKGROUND = Color.web("#011a52"); //blue
 	
 	public static final int width = 385;
 	public static final int height = 500;
@@ -50,7 +47,7 @@ public class SetScene extends Application{
 		return myScene;
 	}
 	
-	//group to be implemented in BreakoutScene and GalagaScene
+	//group to be implemented in BreakoutScene and GalagaScene includes Text Displays
 	public Group createGroup() {
 		Group gameGroup = new Group(); 
 		displayScore.setText("SCORE: " + player.getScore());
