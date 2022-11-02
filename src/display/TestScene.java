@@ -21,6 +21,8 @@ import javafx.util.Duration;
 
 
 //@author Maggie Bickerstaffe
+
+//Class deisgned to test my work 
 public class TestScene extends SetScene{
 	
 	Scene myScene;
@@ -63,7 +65,7 @@ public class TestScene extends SetScene{
 		animation.play();	
 	}
 	
-	
+	// Test Scene that adds and previews objects 
 	public Scene setUp(int width, int height, Paint background) {
 		Group gameGroup = new SetScene().createGroup();
 		// Test Ball

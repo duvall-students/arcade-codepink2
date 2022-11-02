@@ -8,6 +8,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
 
 // @author Maggie Bickerstaffe
+
+//GamePlay Object Class, superclass of ball and bullet 
 public abstract class GamePlayObject{
 
 	//initialize fields
@@ -22,6 +24,7 @@ public abstract class GamePlayObject{
     private Random dice = new Random();
     
     
+    // GamePlayObject constructor 
     public GamePlayObject (Image image) {
         myView = new ImageView(image);
         // make sure it stays a circle
@@ -35,20 +38,25 @@ public abstract class GamePlayObject{
                                  getRandomInRange(OBJECT_MIN_SPEED, OBJECT_MAX_SPEED));
     }
     
+    // sets the size
     public void setSize(int x, int y) {
     	myView.setFitWidth(x);
         myView.setFitHeight(y);
     }
+    
+    // sets the x and y positions 
     public void setPosition(int X, int Y) {
     	myView.setX(X);
         myView.setY(Y);
     }
     
+    // move the ball by setting x and y over a velocity 
     public void moveBall(double elapsedTime) {
     	 myView.setX(myView.getX() + myVelocity.getX() * elapsedTime);
          myView.setY(myView.getY() + myVelocity.getY() * elapsedTime);
     }
     
+    // is the GamePlayObject off the scene?
     public boolean dropsOff (double screenWidth, double screenHeight) {
     	if (myView.getY() > screenHeight - myView.getBoundsInLocal().getHeight()) {
     		return true;
