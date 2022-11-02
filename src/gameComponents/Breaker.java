@@ -5,8 +5,8 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public abstract class Breaker {
-	public int BREAKERWIDTH = 50;
+public class Breaker {
+	public int BREAKERWIDTH = 60;
 	public int BREAKERHEIGHT = 20;
 	public int POINTVALUE = 0;
 	protected int BREAKERXPOSITION = 0;
@@ -33,6 +33,12 @@ public abstract class Breaker {
         myView.setX(x);
         myView.setY(y);
     }
+	
+	public void setPosition(int x, int y) {
+        myView.setX(x);
+        myView.setY(y);
+	}
+	
 	public boolean visible() {
 		return myView.isVisible();
 	}

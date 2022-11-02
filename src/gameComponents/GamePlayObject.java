@@ -11,7 +11,7 @@ import javafx.scene.shape.Circle;
 public abstract class GamePlayObject{
 
 	//initialize fields
-	public static final double OBJECTRADIUS = 3;
+	public static final double OBJECTRADIUS = 50;
 	public int OBJECTXPOSITION = 192;
 	public int OBJECTYPOSITION = 250;
 	public static final int OBJECT_MIN_SPEED = 100;
@@ -35,6 +35,10 @@ public abstract class GamePlayObject{
                                  getRandomInRange(OBJECT_MIN_SPEED, OBJECT_MAX_SPEED));
     }
     
+    public void setSize(int x, int y) {
+    	myView.setFitWidth(x);
+        myView.setFitHeight(y);
+    }
     public void setPosition(int X, int Y) {
     	myView.setX(X);
         myView.setY(Y);
