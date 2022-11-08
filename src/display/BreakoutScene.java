@@ -32,6 +32,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 //@author: Milli Kearse
+//This class shows the scene for the breakout game. 
 public class BreakoutScene extends SetScene{
 
 	public static final String TITLE = "Breakout";
@@ -50,30 +51,25 @@ public class BreakoutScene extends SetScene{
 	public static final int FRAMES_PER_SECOND = 60;
 	public static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 	public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
-	protected int BRICKCOUNT = 0;
+	public int BRICKCOUNT = 0;
 
 	public static final String BOUNCER_IMAGE = "resources/ball.gif";
 	public static final String BRICK_IMAGE = "resources/brick.gif";
 	public static final String CHANGED_BALL_COLOR_IMAGE = "resources/blueBall.gif";
-	public static final String BAT_IMAGE = "resources/breakout_bat.gif";
-	
+
 	File file = new File("TOPSCORE");
 	private List<Bricks> myBricks;
 
-	//Game gamer = new Game();
 	Breakout gamer = new Breakout();
+	//Game gamer = new Game();
 
 	Bricks brick;
 	//Rectangle bat;
+	//PlayerDevice bat = new Bat();
 	PlayerDevice bat;
 	Ball ball;
 	Player player;
 	Timeline animation;
-
-	Text displayScore = new Text();
-	Text displayLives = new Text();
-	Text lostMessage = new Text();
-	Text winMessage = new Text();
 
 	public static void main(String[] args) {
 		launch(args);
@@ -103,18 +99,7 @@ public class BreakoutScene extends SetScene{
 			ball = new Ball(imageBall);
 			root.getChildren().add(ball.getView());
 		}
-		catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		
-		try {
-			Image imageBat = new Image(new FileInputStream(BAT_IMAGE));
-			bat = new Bat(imageBat);
-			root.getChildren().add(bat.getView());
-		}
-		catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		catch (FileNotFoundException e) {}
 
 		int BRICKXPOSITION = 0;
 		int BRICKYPOSITION = 0;
@@ -135,14 +120,16 @@ public class BreakoutScene extends SetScene{
 			BRICKYPOSITION += brick.getHeight() + 5; 
 			BRICKXPOSITION = 0;
 		}
-
-		//calls the SetScene class to load all text displays.
+		
+		//root.getChildren().add(bat);
+		
+		//calls the SetScene class to load all text display.
 		super.createGroup();
 		super.createGroup().getChildren().addAll(displayScore, topScore, level);
-		
+		//set up the scene
 		Scene scene = new Scene(root, width, height, background);
 		//respond to input 
-		scene.setOnKeyPressed(e -> gamer.handleKeyInput(e.getCode(), bat));
+		scene.setOnKeyPressed(e -> new Breakout().handleKeyInput(e.getCode(), bat));
 		return scene;
 	}
 
@@ -163,7 +150,7 @@ public class BreakoutScene extends SetScene{
 				if(player.getScore() == 477) {
 					count += 1;
 					try {
-						levelOneScene = levelOne(width, height, LEVEL_ONE_BACKGROUND);
+						levelOneScene = setUp(width, height, LEVEL_ONE_BACKGROUND);
 						stage.setScene(levelOneScene);
 						Image newBallImage = new Image(new FileInputStream(CHANGED_BALL_COLOR_IMAGE));
 						// Power Up - changes color of ball and makes ball move faster after score gets to 50
@@ -177,14 +164,14 @@ public class BreakoutScene extends SetScene{
 				//once all bricks are cleared in level 1, go to level 2
 				if(player.getScore() == 954) {
 					count += 1;
-					levelTwoScene = levelTwo(width, height, LEVEL_TWO_BACKGROUND);
+					levelTwoScene = setUp(width, height, LEVEL_TWO_BACKGROUND);
 					stage.setScene(levelTwoScene);
 				}
 
 				//once all bricks are cleared in level 2, go to level 3
 				if(player.getScore() == 1431) {
 					count += 1;
-					levelThreeScene = levelThree(width, height, LEVEL_THREE_BACKGROUND);
+					levelThreeScene = setUp(width, height, LEVEL_THREE_BACKGROUND);
 					stage.setScene(levelThreeScene);
 				}
 			}
@@ -192,7 +179,7 @@ public class BreakoutScene extends SetScene{
 
 		/*if (bat.getBoundsInParent().intersects(ball.getView().getBoundsInParent())) {
 			ball.bounce();
-		}	*/
+		}*/	
 		ball.stayInWalls(myScene.getWidth(), myScene.getHeight());
 
 		if (ball.dropsOff(myScene.getWidth(), myScene.getHeight())){
@@ -254,128 +241,4 @@ public class BreakoutScene extends SetScene{
 		}
 	}
 
-	public Scene levelOne(int width, int height, Paint background) {
-		Group root = new Group();
-		player = new Player();
-		try {
-			Image imageBall = new Image(new FileInputStream(BOUNCER_IMAGE));
-			ball = new Ball(imageBall);
-			root.getChildren().add(ball.getView());
-		}
-		catch (FileNotFoundException e) {}
-		//bat = new Bat().createBat();
-
-		int BRICKXPOSITION = 0;
-		int BRICKYPOSITION = 0;
-
-		myBricks = new ArrayList<>();   
-		while (BRICKYPOSITION <= height/2.5) {
-			while (BRICKXPOSITION <= width) {
-				try {
-					Image imageBrick = new Image(new FileInputStream(BRICK_IMAGE));
-					brick = new Bricks(imageBrick, BRICKXPOSITION, BRICKYPOSITION);
-				}
-				catch (FileNotFoundException e) {}
-				myBricks.add(brick);
-				root.getChildren().add(brick.getView()); 
-				BRICKXPOSITION += brick.getWidth() + 5;   
-			}
-			this.brick.setPoints(brick.getPoints() - 1);
-			BRICKYPOSITION += brick.getHeight() + 5; 
-			BRICKXPOSITION = 0;
-		}
-
-
-		//calls the SetScene class to load all text display
-		super.createGroup();
-		//super.createGroup().getChildren().addAll(displayScore, topScore, level);
-		
-		Scene scene1 = new Scene(root, width, height, background);
-		//respond to input 
-		scene1.setOnKeyPressed(e -> gamer.handleKeyInput(e.getCode(), bat));
-		return scene1;
-	}
-
-	public Scene levelTwo(int width, int height, Paint background) {
-		Group root = new Group();
-		player = new Player();
-		try {
-			Image imageBall = new Image(new FileInputStream(BOUNCER_IMAGE));
-			ball = new Ball(imageBall);
-			root.getChildren().add(ball.getView());
-		}
-		catch (FileNotFoundException e) {}
-		//bat = new Bat().createBat();
-
-		int BRICKXPOSITION = 0;
-		int BRICKYPOSITION = 0;
-
-		myBricks = new ArrayList<>();   
-		while (BRICKYPOSITION <= height/2.5) {
-			while (BRICKXPOSITION <= width) {
-				try {
-					Image imageBrick = new Image(new FileInputStream(BRICK_IMAGE));
-					brick = new Bricks(imageBrick, BRICKXPOSITION, BRICKYPOSITION);
-				}
-				catch (FileNotFoundException e) {}
-				myBricks.add(brick);
-				root.getChildren().add(brick.getView()); 
-				BRICKXPOSITION += brick.getWidth() + 5;   
-			}
-			this.brick.setPoints(brick.getPoints() - 1);
-			BRICKYPOSITION += brick.getHeight() + 5; 
-			BRICKXPOSITION = 0;
-		}
-
-		//calls the SetScene class to load all text display
-		super.createGroup();
-		//super.createGroup().getChildren().addAll(displayScore, topScore, level);
-		
-		Scene scene1 = new Scene(root, width, height, background);
-		//respond to input 
-		scene1.setOnKeyPressed(e -> gamer.handleKeyInput(e.getCode(), bat));
-		return scene1;
-	}
-
-	public Scene levelThree(int width, int height, Paint background) {
-		Group root = new Group();
-		player = new Player();
-		try {
-			Image imageBall = new Image(new FileInputStream(BOUNCER_IMAGE));
-			ball = new Ball(imageBall);
-			root.getChildren().add(ball.getView());
-		}
-		catch (FileNotFoundException e) {}
-		//bat = new Bat().createBat();
-
-		int BRICKXPOSITION = 0;
-		int BRICKYPOSITION = 0;
-
-		myBricks = new ArrayList<>();   
-		while (BRICKYPOSITION <= height/2.5) {
-			while (BRICKXPOSITION <= width) {
-				try {
-					Image imageBrick = new Image(new FileInputStream(BRICK_IMAGE));
-					brick = new Bricks(imageBrick, BRICKXPOSITION, BRICKYPOSITION);
-				}
-				catch (FileNotFoundException e) {}
-				myBricks.add(brick);
-				root.getChildren().add(brick.getView()); 
-				BRICKXPOSITION += brick.getWidth() + 5;   
-			}
-			this.brick.setPoints(brick.getPoints() - 1);
-			BRICKYPOSITION += brick.getHeight() + 5; 
-			BRICKXPOSITION = 0;
-		}
-
-
-		//calls the SetScene class to load all text display
-		super.createGroup();
-		//super.createGroup().getChildren().addAll(displayScore, topScore, level);
-		
-		Scene scene1 = new Scene(root, width, height, background);
-		//respond to input 
-		scene1.setOnKeyPressed(e -> gamer.handleKeyInput(e.getCode(), bat));
-		return scene1;
-	}
 }
