@@ -1,5 +1,10 @@
 package gamePlay;
 
+import gameComponents.PlayerDevice;
+import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import gameComponents.Bullet;
+
 //@author: Shannon Seignious
 public class Galaga extends Game {
 	
@@ -12,6 +17,12 @@ public class Galaga extends Game {
     		return true;
     	}
     	return false;
+	}
+	
+	public void createNewShooterBullet(KeyCode code, PlayerDevice playerDevice, Image bulletImage) {
+		 if (code == KeyCode.SPACE) {
+			 Bullet bullet = new Bullet(bulletImage);
+	     }
 	}
 
 }

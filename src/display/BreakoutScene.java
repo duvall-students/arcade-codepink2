@@ -15,6 +15,8 @@ import gameComponents.Ball;
 import gameComponents.Bat;
 import gameComponents.Bricks;
 import gameComponents.Player;
+import gameComponents.PlayerDevice;
+import gamePlay.Breakout;
 import gamePlay.Game;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -48,19 +50,22 @@ public class BreakoutScene extends SetScene{
 	public static final int FRAMES_PER_SECOND = 60;
 	public static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 	public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
-	public int BRICKCOUNT = 0;
+	protected int BRICKCOUNT = 0;
 
 	public static final String BOUNCER_IMAGE = "resources/ball.gif";
 	public static final String BRICK_IMAGE = "resources/brick.gif";
 	public static final String CHANGED_BALL_COLOR_IMAGE = "resources/blueBall.gif";
-
+	public static final String BAT_IMAGE = "resources/breakout_bat.gif";
+	
 	File file = new File("TOPSCORE");
 	private List<Bricks> myBricks;
 
-	Game gamer = new Game();
+	//Game gamer = new Game();
+	Breakout gamer = new Breakout();
 
 	Bricks brick;
-	Rectangle bat;
+	//Rectangle bat;
+	PlayerDevice bat;
 	Ball ball;
 	Player player;
 	Timeline animation;
@@ -77,7 +82,7 @@ public class BreakoutScene extends SetScene{
 	@Override
 	public void start (Stage stage) {
 		// attach scene to the stage and display it
-		myScene = setUpGame(width, height, BACKGROUND);
+		myScene = setUp(width, height, BACKGROUND);
 		stage.setScene(myScene);
 		stage.setTitle(TITLE);
 		stage.show();
@@ -89,7 +94,8 @@ public class BreakoutScene extends SetScene{
 		animation.play();
 	}
 
-	public Scene setUpGame (int width, int height, Paint background) {
+
+	public Scene setUp (int width, int height, Paint background) {
 		Group root = new Group();
 		player = new Player();
 		try {
@@ -97,8 +103,18 @@ public class BreakoutScene extends SetScene{
 			ball = new Ball(imageBall);
 			root.getChildren().add(ball.getView());
 		}
-		catch (FileNotFoundException e) {}
-		bat = new Bat().createBat();
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			Image imageBat = new Image(new FileInputStream(BAT_IMAGE));
+			bat = new Bat(imageBat);
+			root.getChildren().add(bat.getView());
+		}
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 
 		int BRICKXPOSITION = 0;
 		int BRICKYPOSITION = 0;
@@ -120,27 +136,13 @@ public class BreakoutScene extends SetScene{
 			BRICKXPOSITION = 0;
 		}
 
-
-		displayScore.setText("SCORE:" + String.valueOf(player.SCORE));
-		displayScore.setFill(Color.WHITE);
-		displayScore.setFont(Font.font(18));
-		displayScore.setX(10);
-		displayScore.setY(482);
-
-		displayLives.setText("LIVES:" + String.valueOf(player.getLives()));
-		displayLives.setFill(Color.WHITE);
-		displayLives.setFont(Font.font(18));
-		displayLives.setX(10);
-		displayLives.setY(465);
-
-		root.getChildren().add(bat);
-		root.getChildren().addAll(displayScore);
-		root.getChildren().add(displayLives);
-		root.getChildren().add(lostMessage);
-		root.getChildren().add(winMessage);
+		//calls the SetScene class to load all text displays.
+		super.createGroup();
+		super.createGroup().getChildren().addAll(displayScore, topScore, level);
+		
 		Scene scene = new Scene(root, width, height, background);
 		//respond to input 
-		scene.setOnKeyPressed(e -> new Game().handleKeyInput(e.getCode(), bat));
+		scene.setOnKeyPressed(e -> gamer.handleKeyInput(e.getCode(), bat));
 		return scene;
 	}
 
@@ -188,9 +190,9 @@ public class BreakoutScene extends SetScene{
 			}
 		}
 
-		if (bat.getBoundsInParent().intersects(ball.getView().getBoundsInParent())) {
+		/*if (bat.getBoundsInParent().intersects(ball.getView().getBoundsInParent())) {
 			ball.bounce();
-		}	
+		}	*/
 		ball.stayInWalls(myScene.getWidth(), myScene.getHeight());
 
 		if (ball.dropsOff(myScene.getWidth(), myScene.getHeight())){
@@ -230,22 +232,14 @@ public class BreakoutScene extends SetScene{
 				System.err.println("Couldn't read in scores from file");
 			}
 			// report a won message 
-			winMessage.setText("Congrats! You win!");
-			winMessage.setFill(Color.WHITE);
-			winMessage.setFont(Font.font(28));
-			winMessage.setX(100);
-			winMessage.setY(350);
+			super.createGroup().getChildren().add(winMessage);
 		}
 
 		if(gamer.lostGame(player)) {
 			animation.stop();
 			addCurrentScoreToScoresFile(player.getScore(), file);
 			//return a lost message
-			lostMessage.setText("Sorry. You Lose!");
-			lostMessage.setFill(Color.WHITE);
-			lostMessage.setFont(Font.font(28));
-			lostMessage.setX(100);
-			lostMessage.setY(350) ;
+			super.createGroup().getChildren().add(lostMessage);
 		}
 	}
 
@@ -269,7 +263,7 @@ public class BreakoutScene extends SetScene{
 			root.getChildren().add(ball.getView());
 		}
 		catch (FileNotFoundException e) {}
-		bat = new Bat().createBat();
+		//bat = new Bat().createBat();
 
 		int BRICKXPOSITION = 0;
 		int BRICKYPOSITION = 0;
@@ -292,26 +286,13 @@ public class BreakoutScene extends SetScene{
 		}
 
 
-		displayScore.setText("SCORE:" + String.valueOf(player.SCORE));
-		displayScore.setFill(Color.WHITE);
-		displayScore.setFont(Font.font(18));
-		displayScore.setX(10);
-		displayScore.setY(482);
-
-		displayLives.setText("LIVES:" + String.valueOf(player.getLives()));
-		displayLives.setFill(Color.WHITE);
-		displayLives.setFont(Font.font(18));
-		displayLives.setX(10);
-		displayLives.setY(465);
-
-		root.getChildren().add(bat);
-		root.getChildren().addAll(displayScore);
-		root.getChildren().add(displayLives);
-		root.getChildren().add(lostMessage);
-		root.getChildren().add(winMessage);
+		//calls the SetScene class to load all text display
+		super.createGroup();
+		//super.createGroup().getChildren().addAll(displayScore, topScore, level);
+		
 		Scene scene1 = new Scene(root, width, height, background);
 		//respond to input 
-		scene1.setOnKeyPressed(e -> new Game().handleKeyInput(e.getCode(), bat));
+		scene1.setOnKeyPressed(e -> gamer.handleKeyInput(e.getCode(), bat));
 		return scene1;
 	}
 
@@ -324,7 +305,7 @@ public class BreakoutScene extends SetScene{
 			root.getChildren().add(ball.getView());
 		}
 		catch (FileNotFoundException e) {}
-		bat = new Bat().createBat();
+		//bat = new Bat().createBat();
 
 		int BRICKXPOSITION = 0;
 		int BRICKYPOSITION = 0;
@@ -346,27 +327,13 @@ public class BreakoutScene extends SetScene{
 			BRICKXPOSITION = 0;
 		}
 
-
-		displayScore.setText("SCORE:" + String.valueOf(player.SCORE));
-		displayScore.setFill(Color.WHITE);
-		displayScore.setFont(Font.font(18));
-		displayScore.setX(10);
-		displayScore.setY(482);
-
-		displayLives.setText("LIVES:" + String.valueOf(player.getLives()));
-		displayLives.setFill(Color.WHITE);
-		displayLives.setFont(Font.font(18));
-		displayLives.setX(10);
-		displayLives.setY(465);
-
-		root.getChildren().add(bat);
-		root.getChildren().addAll(displayScore);
-		root.getChildren().add(displayLives);
-		root.getChildren().add(lostMessage);
-		root.getChildren().add(winMessage);
+		//calls the SetScene class to load all text display
+		super.createGroup();
+		//super.createGroup().getChildren().addAll(displayScore, topScore, level);
+		
 		Scene scene1 = new Scene(root, width, height, background);
 		//respond to input 
-		scene1.setOnKeyPressed(e -> new Game().handleKeyInput(e.getCode(), bat));
+		scene1.setOnKeyPressed(e -> gamer.handleKeyInput(e.getCode(), bat));
 		return scene1;
 	}
 
@@ -379,7 +346,7 @@ public class BreakoutScene extends SetScene{
 			root.getChildren().add(ball.getView());
 		}
 		catch (FileNotFoundException e) {}
-		bat = new Bat().createBat();
+		//bat = new Bat().createBat();
 
 		int BRICKXPOSITION = 0;
 		int BRICKYPOSITION = 0;
@@ -402,26 +369,13 @@ public class BreakoutScene extends SetScene{
 		}
 
 
-		displayScore.setText("SCORE:" + String.valueOf(player.SCORE));
-		displayScore.setFill(Color.WHITE);
-		displayScore.setFont(Font.font(18));
-		displayScore.setX(10);
-		displayScore.setY(482);
-
-		displayLives.setText("LIVES:" + String.valueOf(player.getLives()));
-		displayLives.setFill(Color.WHITE);
-		displayLives.setFont(Font.font(18));
-		displayLives.setX(10);
-		displayLives.setY(465);
-
-		root.getChildren().add(bat);
-		root.getChildren().addAll(displayScore);
-		root.getChildren().add(displayLives);
-		root.getChildren().add(lostMessage);
-		root.getChildren().add(winMessage);
+		//calls the SetScene class to load all text display
+		super.createGroup();
+		//super.createGroup().getChildren().addAll(displayScore, topScore, level);
+		
 		Scene scene1 = new Scene(root, width, height, background);
 		//respond to input 
-		scene1.setOnKeyPressed(e -> new Game().handleKeyInput(e.getCode(), bat));
+		scene1.setOnKeyPressed(e -> gamer.handleKeyInput(e.getCode(), bat));
 		return scene1;
 	}
 }

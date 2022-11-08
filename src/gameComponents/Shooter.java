@@ -22,7 +22,7 @@ public class Shooter extends PlayerDevice {
 	@Override
 	public Node getView() {
 		// Creates player device node
-		return playerShooter;
+		return playerDevice;
 	}
 
 }

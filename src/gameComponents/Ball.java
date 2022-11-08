@@ -22,7 +22,7 @@ public class Ball extends GamePlayObject{
 	    BALL_MAX_SPEED = 150;
 	    
 	}
-	
+    
 	// ensures the ball stays in the boundaries of the scene 
     public void stayInWalls (double screenWidth, double screenHeight) {
         // collide all bouncers against the walls
@@ -51,5 +51,6 @@ public class Ball extends GamePlayObject{
 		myView.setFitWidth(BALLRADIUS);
 		myView.setFitHeight(BALLRADIUS);
 	}
+	
 
 }
